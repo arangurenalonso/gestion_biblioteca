@@ -1,0 +1,424 @@
+<app-modal-buscar-visitante
+  *ngIf="modalService.switchModalBuscarVisitante"
+></app-modal-buscar-visitante>
+
+<div class="body d-flex py-lg-3 py-md-2">
+  <div class="container-xxl">
+    <div class="row align-items-center">
+      <div class="border-0 mb-4">
+        <div
+          class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap"
+        >
+          <h1 class="fw-bold mb-0 text-primary">Prestamo Libro</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row end  -->
+
+    <mat-stepper linear #stepper>
+      <mat-step [completed]="loan.loanDetails.length > 0">
+        <ng-template matStepLabel>Elegir libros</ng-template>
+        <div>
+          <div class="row d-flex justify-content-center">
+            <div class="row col-5">
+              <div class="input-group rounded">
+                <input
+                  type="text"
+                  (keyup)="buscarNombre()"
+                  class="form-control rounded"
+                  placeholder="Buscar Nombre Visitante"
+                  aria-label="Search"
+                  [(ngModel)]="nombreLibro"
+                  aria-describedby="search-addon"
+                />
+                <span
+                  class="input-group-text border-0"
+                  id="search-addon"
+                  (click)="buscarNombre()"
+                >
+                  <i class="fas fa-search"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row col-2">
+              <div class="form-group">
+                <select
+                  (change)="selectAuthor()"
+                  [(ngModel)]="authorSeleccionado"
+                  class="form-control"
+                >
+                  <option [value]="0">Filtro Author</option>
+                  <option *ngFor="let author of authores" [value]="author.id">
+                    {{ author.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row col-2">
+              <div class="form-group">
+                <select
+                  (change)="selectEditorial()"
+                  [(ngModel)]="editorialSeleccionada"
+                  class="form-control"
+                >
+                  <option [value]="0">Filtro Editorial</option>
+                  <option
+                    *ngFor="let editorial of editoriales"
+                    [value]="editorial.id"
+                  >
+                    {{ editorial.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col"></div>
+            <div class="row col-2">
+              <button
+                class="btn btn-info"
+                mat-button
+                *ngIf="loan.loanDetails.length > 0"
+                (click)="goForwardStep1(stepper)"
+              >
+                Next ->
+              </button>
+            </div>
+          </div>
+          <div class="row clearfix g-3">
+            <div class="col-sm-12">
+              <div class="card mx-1 my-3">
+                <div class="card-body">
+                  <table
+                    id="myProjectTable"
+                    class="table table-hover align-middle mb-0"
+                    style="width: 100%"
+                  >
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>Nombre</th>
+                        <th>ISBN</th>
+                        <th>Año</th>
+                        <th>Stock</th>
+                        <th>Cant. Prestada</th>
+                        <th>Cant. Disp</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                      <tr *ngFor="let obj of books">
+                        <td class="cursor-pointer-g">{{ obj.id }}</td>
+                        <td>{{ obj.name }}</td>
+                        <td>{{ obj.isbn }}</td>
+                        <td>{{ obj.publicationYear }}</td>
+                        <td>{{ obj.stock }}</td>
+                        <td>{{ obj.borrowedStock }}</td>
+                        <td>{{ obj.availableStock }}</td>
+                        <td>
+                          <button
+                            type="button"
+                            name="agregar"
+                            class="btn btn-sm"
+                            (click)="agregar(obj); $event.stopPropagation()"
+                          >
+                            <span class="btn btn-sm btn-success">Agregar</span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!--FIN-->
+                  <mat-paginator
+                    *ngIf="paginator"
+                    [length]="paginator.totalElementos"
+                    [pageSize]="pageSize"
+                    [pageIndex]="pageNumber"
+                    [showFirstLastButtons]="true"
+                    [pageSizeOptions]="pagSizeOption"
+                    aria-label="Select page"
+                    (page)="pageEvent($event)"
+                  >
+                  </mat-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div class="row clearfix g-3">
+            <div class="col-sm-12">
+              <div class="card mx-1 my-3">
+                <div class="card-body">
+                  <table
+                    id="myProjectTable"
+                    class="table table-hover align-middle mb-0"
+                    style="width: 100%"
+                  >
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>Nombre</th>
+                        <th>ISBN</th>
+                        <th>Año</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                      <tr *ngFor="let obj of loan.loanDetails">
+                        <td class="cursor-pointer-g">{{ obj.book.id }}</td>
+                        <td>{{ obj.book.name }}</td>
+                        <td>{{ obj.book.isbn }}</td>
+                        <td>{{ obj.book.publicationYear }}</td>
+                        <td>
+                          <button
+                            type="button"
+                            name="eliminar"
+                            class="btn btn-sm"
+                            (click)="eliminar(obj); $event.stopPropagation()"
+                          >
+                            <span class="btn btn-sm btn-danger">eliminar</span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step completed="loan.client&&loan.expirationDate">
+        <ng-template matStepLabel>Datos Prestamo</ng-template>
+        <div>
+          <div class="row">
+            <div class="h2 fw-bold col-8 mb-3">Cabecera Prestamo</div>
+            <div class="col"></div>
+            <div class="col-1">
+              <button
+                class="btn btn-info"
+                mat-button
+                *ngIf="loan.client && loan.expirationDate"
+                (click)="goForwardStep1(stepper)"
+              >
+                Next ->
+              </button>
+            </div>
+          </div>
+
+          <div class="row clearfix g-3">
+            <div class="col-lg-6">
+              <div class="card mb-3">
+                <div
+                  class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0"
+                >
+                  <h2 class="m-0 fw-bold">Datos de Devolución</h2>
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="" class="form-label col-2"
+                      >Fecha de devolución</label
+                    >
+                    <div class="col">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Elije una fecha</mat-label>
+                        <input
+                          matInput
+                          [matDatepickerFilter]="myFilter"
+                          [matDatepicker]="picker"
+                          [(ngModel)]="loan.expirationDate"
+                          name="birthdayDate"
+                          disabled
+                        />
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker
+                          #picker
+                          disabled="false"
+                        ></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card mb-3">
+                <div class="card-header py-3 bg-transparent border-bottom-0">
+                  <div class="row">
+                    <div class="m-0 h5 fw-bold col-8">Datos Del Cliente</div>
+
+                    <div class="row col-4">
+                      <button
+                        *ngIf="!loan.client"
+                        type="button"
+                        name="editar"
+                        class="btn btn-primary btn-sm"
+                        (click)="abrirModalCrearCliente()"
+                      >
+                        <i class="icofont-plus-circle me-2 fs-6"></i>Nuevo
+                        Cliente
+                      </button>
+
+                      <button
+                        *ngIf="loan.client"
+                        type="button"
+                        name="editar"
+                        class="btn btn-warning btn-sm"
+                        (click)="borrarCliente()"
+                      >
+                        Borrar Cliente
+                      </button>
+                    </div>
+                  </div>
+
+                  <br />
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="input-group rounded col">
+                        <input
+                          type="text"
+                          class="form-control rounded"
+                          placeholder="Search"
+                          aria-label="Search"
+                          [(ngModel)]="filtro"
+                          [disabled]="loan.client != null"
+                          aria-describedby="search-addon"
+                        />
+                        <span
+                          class="input-group-text border-0"
+                          id="search-addon"
+                          (click)="buscarCliente()"
+                        >
+                          <i class="fas fa-search"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body" *ngIf="loan.client">
+                  <div class="row">
+                    <div class="col-8">
+                      <label class="form-label text-secondary"
+                        >Nombre Completo:
+                      </label>
+                      <p class="ml-5">
+                        {{ loan.client.person.name }}
+                        {{ loan.client.person.surname }}
+                      </p>
+                      <label class="form-label text-secondary">DNI: </label>
+                      <p>{{ loan.client.person.dni }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="m-0 h2 fw-bold col-8">Detalle Prestamo</div>
+          <div class="row clearfix g-3">
+            <div class="col-sm-12">
+              <div class="card mx-1 my-3">
+                <div class="card-body">
+                  <table
+                    id="myProjectTable"
+                    class="table table-hover align-middle mb-0"
+                    style="width: 100%"
+                  >
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>Nombre</th>
+                        <th>ISBN</th>
+                        <th>Año</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                      <tr *ngFor="let obj of loan.loanDetails">
+                        <td class="cursor-pointer-g">{{ obj.book.id }}</td>
+                        <td>{{ obj.book.name }}</td>
+                        <td>{{ obj.book.isbn }}</td>
+                        <td>{{ obj.book.publicationYear }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Confirmar Prestamo</ng-template>
+
+       
+        <div class="col mt-5" *ngIf="loan.client && loan.expirationDate">
+          <div class="card auth-detailblock">
+            <div class="card-header">
+              <div class="row g-3">
+                <div class="row d-flex justify-content-center my-4">
+                  <h1 class="mb-0 fw-bold text-success text-center">
+                    Detalle de Prestamo
+                  </h1>
+                </div>
+
+                <div class="col-6">
+                  <label class="form-label col-6 col-sm-5">Cliente:</label>
+                  <span>  {{ loan.client.person.name }}
+                    {{ loan.client.person.surname }}</span>
+                </div>
+                <div class="col-6">
+                  <label class="form-label col-6 col-sm-5">Fecha de devolución:</label>
+                  <span>{{ loan.expirationDate | date: "dd MMMM yyyy" }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <table
+                id="myProjectTable"
+                class="table table-hover align-middle mb-0"
+                style="width: 100%"
+              >
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>ISBN</th>
+                    <th>Año</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr></tr>
+                  <tr *ngFor="let obj of loan.loanDetails">
+                    <td class="cursor-pointer-g">{{ obj.book.id }}</td>
+                    <td>{{ obj.book.name }}</td>
+                    <td>{{ obj.book.isbn }}</td>
+                    <td>{{ obj.book.publicationYear }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer">
+             
+
+              <div>
+                <button
+                  type="button"
+                  name="editar"
+                  class="btn btn-dark w-100"
+                  *ngIf="loan.client && loan.expirationDate"
+                  (click)="procesarPrestamo()"
+                >
+                  Confirmar Prestamo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

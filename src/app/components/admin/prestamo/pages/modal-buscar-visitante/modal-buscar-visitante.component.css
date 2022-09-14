@@ -1,0 +1,13 @@
+.color-fondo {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100000;
+}
+
+.ancho-modal {
+  width: 50%;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 200000;
+}
+/*# sourceMappingURL=modal-buscar-visitante.component.css.map */

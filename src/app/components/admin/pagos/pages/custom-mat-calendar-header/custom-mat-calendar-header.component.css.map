@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "custom-mat-calendar-header.component.scss"
+    ],
+    "names": [],
+    "file": "custom-mat-calendar-header.component.css"
+}

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAA;EACR,gBAAgB,EAAE,kBAAe;EACjC,OAAO,EAAE,MAAM;CAClB;;AACD,AAAA,YAAY,CAAA;EACR,KAAK,EAAE,GAAG;CACb",
+    "sources": [
+        "modal-finalizacion-incidente.component.scss"
+    ],
+    "names": [],
+    "file": "modal-finalizacion-incidente.component.css"
+}

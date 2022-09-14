@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,8BAA8B,CAAC;EAC3B,cAAc,EAAE,eAAe;CAChC",
+    "sources": [
+        "prestamo.component.scss"
+    ],
+    "names": [],
+    "file": "prestamo.component.css"
+}

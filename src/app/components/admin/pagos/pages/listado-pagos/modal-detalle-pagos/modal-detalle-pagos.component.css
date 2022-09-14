@@ -1,0 +1,9 @@
+.color-fondo {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100000;
+}
+
+.ancho-modal {
+  width: 50%;
+}
+/*# sourceMappingURL=modal-detalle-pagos.component.css.map */

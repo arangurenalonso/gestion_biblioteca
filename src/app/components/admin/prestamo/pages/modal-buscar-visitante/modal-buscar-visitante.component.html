@@ -1,0 +1,165 @@
+<div class="abrir-modal animacion fadeIn" (click)="cerrarModal()">
+  <div
+    class="modal color-fondo d-flex justify-content-center align-items-center"
+    tabindex="-1"
+    role="dialog"
+    style="display: block"
+  >
+    <div class="alert alert-danger" *ngIf="errores">
+      <h1 class="">ERROR EN EL INGRESO DE DATOS</h1>
+      <div class="text-danger" *ngFor="let err of errores | keyvalue">
+        Campo '<b>{{ err.key }} </b>':
+        {{ err.value }}
+      </div>
+    </div>
+
+    <div
+      class="modal-dialog modal-lg ancho-modal"
+      role="document"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title text-success">
+            {{ titulo }}
+          </h1>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="cerrarModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #familiarFormValid="ngForm" autocomplete="nope">
+          <div class="modal-body">
+            <!--Inicio-->
+            <!--NOMBE-->
+            <div class="form-group row mb-4">
+              <label for="" class="col-form-label col-sm-2">Nombre</label>
+              <div class="col-sm-6">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.person.name"
+                  name="nombre"
+                  #nombre="ngModel"
+                  required
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+                >
+                  <div *ngIf="nombre.errors.required">
+                    El nombre es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--APELLIDO-->
+            <div class="form-group row mb-4">
+              <label for="" class="col-form-label col-sm-2">Apellido</label>
+              <div class="col-sm-6">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.person.surname"
+                  name="apellido"
+                  #apellido="ngModel"
+                  required
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="
+                    apellido.invalid && (apellido.dirty || apellido.touched)
+                  "
+                >
+                  <div *ngIf="apellido.errors.required">
+                    El apellido es obligatorio
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--DNI-->
+            <div class="form-group row mb-4">
+              <label for="" class="col-form-label col-sm-2">DNI</label>
+              <div class="col-sm-6">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.person.dni"
+                  name="dni"
+                  #dni="ngModel"
+                  required
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="dni.invalid && (dni.dirty || dni.touched)"
+                >
+                  <div *ngIf="dni.errors.required">El DNI es obligatorio</div>
+                </div>
+              </div>
+            </div>
+            <!--EMAIL-->
+            <div class="form-group row mb-4">
+              <label for="" class="col-form-label col-sm-2">Correo</label>
+              <div class="col-sm-6">
+                <input
+                  type="email"
+                  class="form-control"
+                  [(ngModel)]="user.email"
+                  name="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  [class.is-invalid]="
+                    email.errors && (email.dirty || email.touched)
+                  "
+                  #email="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="email.errors && (email.dirty || email.touched)"
+                  class="alert alert-danger"
+                >
+                  <div [hidden]="!email.errors['pattern']">
+                    Please input a valid email.
+                  </div>
+                  <div [hidden]="!email.errors['required']">
+                    Email is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--FIN-->
+          </div>
+          <div class="modal-footer">
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <button
+                  class="btn btn-primary"
+                  role="button"
+                  (click)="create()"
+                  [disabled]="!familiarFormValid.form.valid"
+                >
+                  Crear
+                </button>
+              </div>
+              <div class="col-sm-6">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  (click)="cerrarModal()"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
