@@ -37,8 +37,6 @@ export class AddComponent implements OnInit {
     let editoriales=await this.editorialService.all()
     this.editoriales = editoriales.detalle.data
 
-    console.log("authores",this.authores);
-    console.log("editoriales",this.editoriales);
     await this.cargarInformación();
 
   }
@@ -47,29 +45,16 @@ export class AddComponent implements OnInit {
 
   async cargarInformación(): Promise<void> {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(id);
     if (id) {
       let obj = await this.bookService.findById(id)
       this.libro = obj.detalle.data
       this.titulo = `Editar ${this.entityName}`
-      console.log(this.authores);
-      console.log(this.libro.authors);
-      
-      console.log(this.editoriales);
-      console.log(this.libro.editorials);
       
       
-      
-      this.actualizarEditorial()
-      this.actualizarAuthor()
+    this.editoriales = this.editoriales.filter(x => this.filtrado(x, this.libro.editorials));
+    this.authores = this.authores.filter(x => this.filtrado(x, this.libro.authors));
 
     }
-  }
-  actualizarEditorial() {
-    this.editoriales = this.editoriales.filter(x => this.filtrado(x, this.libro.editorials));
-  }
-  actualizarAuthor() {
-    this.authores = this.authores.filter(x => this.filtrado(x, this.libro.authors));
   }
 
   filtrado(obj, list1): boolean {
@@ -82,10 +67,6 @@ export class AddComponent implements OnInit {
     })
     return isFilter;
   }
-
-
-
-
 
 
   addEditorial(editorial: Editorial) {
@@ -109,9 +90,28 @@ export class AddComponent implements OnInit {
     this.authores.sort((x, y) => x.id - y.id)
   }
   create() {
+    this.bookService.registrar(this.libro)
+      .subscribe(response => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: response.detalle.data.mensaje,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.router.navigate(['/admin/libro/listado'])
+      },
+        err => {
+          let respuesta = err.error
+          this.errores = respuesta.detalle.data
+        }
+      )
+
+  }
+  update() {
     console.log(this.libro);
 
-    this.bookService.registrar(this.libro)
+    this.bookService.actualizar(this.libro)
       .subscribe(response => {
         console.log(response.detalle.data)
         Swal.fire({
