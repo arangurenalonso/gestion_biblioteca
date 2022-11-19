@@ -1,0 +1,64 @@
+
+        <div class="col mt-5" *ngIf="loan.client && loan.expirationDate">
+            <div class="card auth-detailblock">
+              <div class="card-header">
+                <div class="row g-3">
+                  <div class="row d-flex justify-content-center my-4">
+                    <h1 class="mb-0 fw-bold text-success text-center">
+                      Detalle de Prestamo
+                    </h1>
+                  </div>
+  
+                  <div class="col-6">
+                    <label class="form-label col-6 col-sm-5">Cliente:</label>
+                    <span>  {{ loan.client.person.name }}
+                      {{ loan.client.person.surname }}</span>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label col-6 col-sm-5">Fecha de devolución:</label>
+                    <span>{{ loan.expirationDate | date: "dd MMMM yyyy" }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <table
+                  id="myProjectTable"
+                  class="table table-hover align-middle mb-0"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>id</th>
+                      <th>Nombre</th>
+                      <th>ISBN</th>
+                      <th>Año</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr></tr>
+                    <tr *ngFor="let obj of loan.loanDetails">
+                      <td class="cursor-pointer-g">{{ obj.book.id }}</td>
+                      <td>{{ obj.book.name }}</td>
+                      <td>{{ obj.book.isbn }}</td>
+                      <td>{{ obj.book.publicationYear }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer" *ngIf="!loan?.id">
+               
+  
+                <div>
+                  <button
+                    type="button"
+                    name="editar"
+                    class="btn btn-dark w-100"
+                    *ngIf="loan.client && loan.expirationDate"
+                    (click)="procesarPrestamo()"
+                  >
+                    Confirmar Prestamo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>

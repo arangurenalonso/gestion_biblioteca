@@ -4,13 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
-import { ServicioDTO } from '../dto/ServicioDTO';
-import { Servicio } from '../model/servicio';
-import { IncidenteDTO } from '../dto/IncidenteDTO';
-import { Incidente } from '../model/Incidente';
-import { Editorial } from '../model/editorial';
-import { Author } from '../model/author';
-import { Book } from '../model/book';
 import { Loan } from '../model/loan';
 //import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({ 
@@ -68,6 +61,8 @@ export class LoanService {
   }
 
   registrar(loan: Loan): Observable<any> {
+    console.log("Prestamo",loan);
+    
     return this.http.post(this.urlEndPoint, loan, { headers: this.authService.agregarAuthorizationHeader(this.httpHeaders) })
       .pipe(
         catchError(e => {

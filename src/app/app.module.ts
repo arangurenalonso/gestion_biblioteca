@@ -10,9 +10,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AuthService } from './services/auth.service';
-import { DepartamentoService } from './services/departamentoservice';
 import { AuthGuard } from './guards/auth.guard';
-import { PropietarioService } from './services/propietarioservice';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
@@ -28,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NotificationModule,
     BrowserAnimationsModule,
   ],
-  providers: [NotifierService, AuthGuard, AuthService, DepartamentoService,PropietarioService,
+  providers: [NotifierService, AuthGuard, AuthService, 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

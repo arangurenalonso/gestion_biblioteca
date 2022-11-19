@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Role } from 'src/app/model/roles';
 import { Usuario } from 'src/app/model/usuarios';
-import { Visitante } from 'src/app/model/visitante';
 import { ModalService } from 'src/app/services/modal.service';
 import { UserService } from 'src/app/services/userService';
 import Swal from 'sweetalert2';

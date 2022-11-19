@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Author } from 'src/app/model/author';
 import { Book } from 'src/app/model/book';
-import { Departamento } from 'src/app/model/departamento';
 import { Editorial } from 'src/app/model/editorial';
 import { AuthorService } from 'src/app/services/authorService';
 import { EditorialService } from 'src/app/services/editorialService';

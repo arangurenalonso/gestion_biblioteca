@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AACE,AAAA,IAAI,CAAC;EACH,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,gBAAgB,EAAE,OAAO;EACzB,MAAM,EAAE,iBAAiB;CAC1B;;AAEH,AAAA,cAAc,CAAA;EACZ,SAAS,EAAE,IAAI;CAChB;;AACC;;IAEE;AASF,AAAA,KAAK,CAAC,SAAS,CAAC,sBAAsB,CAAA;EACpC,OAAO,EAAE,IAAI;CACd;;AAED,AAAA,KAAK,CAAC,SAAS,CAAC,2BAA2B,CAAA;EACzC,OAAO,EAAE,IAAI;CACd",
-    "sources": [
-        "programacion-pagos.component.scss"
-    ],
-    "names": [],
-    "file": "programacion-pagos.component.css"
-}

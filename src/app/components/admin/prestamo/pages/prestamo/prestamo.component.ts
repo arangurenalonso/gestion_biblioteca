@@ -215,7 +215,8 @@ export class PrestamoComponent implements OnInit {
       confirmButtonText: 'Yes, do it!'
     }).then((result) => {
       if (result.isConfirmed) {
-
+        console.log("this.loan",this.loan);
+        
         this.loanService.registrar(this.loan)
           .subscribe(response => {
             console.log(response)

@@ -48,16 +48,16 @@
                   <td>{{ obj.client.person.name }} {{ obj.client.person.surname }}</td>
                   <td>{{ obj.loanDetails.length }} </td>
                   <td>
-                    <!-- <button
+                    <button
                       type="button"
                       name="editar"
                       class="btn btn-primary btn-sm"
                       [routerLink]="[
-                        '/admin/author/update',
-                        obj.id
+                        '/admin/prestamo/view',
+                        obj.id 
                       ]"
                     >
-                      editar
+                      view
                     </button>
                     <button
                       type="button"
@@ -72,7 +72,7 @@
                         class="btn btn-sm btn-danger"
                         >Eliminar</span
                       >
-                    </button> -->
+                    </button>
                   </td>
                 </tr>
               </tbody>

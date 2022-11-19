@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Respuesta } from 'src/app/dto/Respuesta';
 import { Editorial } from 'src/app/model/editorial';
 import { EditorialService } from 'src/app/services/editorialService';
 import swal from 'sweetalert2';
@@ -52,7 +51,7 @@ export class FormComponent implements OnInit {
         this.router.navigate(['/admin/editorial/listado'])
       },
         err => {
-          let respuesta:Respuesta=err.error
+          let respuesta=err.error
           this.errores=respuesta.detalle.data
         }
       )
@@ -73,7 +72,7 @@ export class FormComponent implements OnInit {
 
       },
       err => {
-        let respuesta:Respuesta=err.error
+        let respuesta=err.error
         this.errores=respuesta.detalle.data
         
       }

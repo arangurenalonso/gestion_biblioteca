@@ -4,12 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, firstValueFrom, map, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
-import { ServicioDTO } from '../dto/ServicioDTO';
-import { Servicio } from '../model/servicio';
-import { IncidenteDTO } from '../dto/IncidenteDTO';
-import { Incidente } from '../model/Incidente';
-import { Editorial } from '../model/editorial';
-import { Author } from '../model/author';
 import { Book } from '../model/book';
 //import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({ 

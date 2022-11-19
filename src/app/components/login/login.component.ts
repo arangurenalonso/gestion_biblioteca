@@ -3,7 +3,6 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { NotificationService } from 'src/app/services/notificationService';
 import { Usuario } from 'src/app/model/usuarios';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
 
@@ -23,8 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private userService: UserService,
-    private notificationService: NotificationService) {
+    private userService: UserService,) {
     this.usuario = new Usuario()
   }
 
@@ -61,7 +59,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           });
         let usuarioConectado=this.authService.usuario
 
-        this.notificationService.notify('success', 'Notification successfully opened.' )
         swal.fire('Login', `Hola ${usuarioConectado.person.name} ${usuarioConectado.person.surname}, has iniciado sesión con éxito!`, 'success');
         this.showLoading = false;
         this.router.navigateByUrl('/admin/');
@@ -77,11 +74,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private sendErrorNotification(notificationType: NotificationType, message: string): void {
-    if (message) {
-      this.notificationService.notify(notificationType, message);
-    } else {
-      this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
-    }
   }
 
   ngOnDestroy(): void {

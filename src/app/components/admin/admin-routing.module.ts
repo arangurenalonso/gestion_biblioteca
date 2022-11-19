@@ -24,20 +24,8 @@ const routes: Routes = [
         loadChildren: () => import('./prestamo/prestamo.module').then(m=>m.PrestamoModule)
       },
       {
-        path: 'servicio',
-        loadChildren: () => import('./servicio/servicio.module').then(m=>m.ServicioModule)
-      },
-      {
         path: 'editorial',
         loadChildren: () => import('./editorial/editorial.module').then(m=>m.EditorialModule)
-      },
-      {
-        path: 'pagos',
-        loadChildren: () => import('./pagos/pagos.module').then(m=>m.PagosModule)
-      },
-      {
-        path: 'eventos',
-        loadChildren: () => import('./evento/evento.module').then(m=>m.EventoModule)
       },
       { path: '**', redirectTo: 'home' }
     ]

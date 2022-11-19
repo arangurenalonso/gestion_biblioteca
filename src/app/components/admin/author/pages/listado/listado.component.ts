@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { Author } from 'src/app/model/author';
-import { Departamento } from 'src/app/model/departamento';
 import { AuthorService } from 'src/app/services/authorService';
-import { DepartamentoService } from 'src/app/services/departamentoservice';
 import Swal from 'sweetalert2';
 
 @Component({

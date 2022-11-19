@@ -13,6 +13,6 @@ export class Book {
 
     editorials:Editorial[]=[];
     authors: Author[]=[];
-
+    urlImg:string="https://dawi1.s3.sa-east-1.amazonaws.com/1668547446170_descarga.jpg"
 
   }

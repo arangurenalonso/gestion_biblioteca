@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DepartamentoDTO } from 'src/app/dto/departamentoDTO';
-import { Respuesta } from 'src/app/dto/Respuesta';
 import { Author } from 'src/app/model/author';
-import { Departamento } from 'src/app/model/departamento';
 import { AuthorService } from 'src/app/services/authorService';
-import { DepartamentoService } from 'src/app/services/departamentoservice';
-import Swal from 'sweetalert2';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-form',
@@ -38,7 +33,7 @@ export class FormComponent implements OnInit {
         )
         this.titulo =`Editar ${this.entityName}` 
       }
-    }) 
+    })  
   }
   public create(): void {
     
@@ -57,7 +52,7 @@ export class FormComponent implements OnInit {
         err => {
           console.log(err);
           
-          let respuesta:Respuesta=err.error
+          let respuesta=err.error
           this.errores=respuesta.detalle.data
         }
       )
@@ -78,7 +73,7 @@ export class FormComponent implements OnInit {
 
       },
       err => {
-        let respuesta:Respuesta=err.error
+        let respuesta=err.error
         this.errores=respuesta.detalle.data
         
       }

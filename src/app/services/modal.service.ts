@@ -1,7 +1,4 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { EventoIncidente } from '../model/EventoIncidente';
-import { PagoServicio } from '../model/PagoServicio';
-import { Visitante } from '../model/visitante';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +77,7 @@ export class ModalService {
   constructor() { }
 
   
-  abrirModalFinalizarIncidente(ps:EventoIncidente){
+  abrirModalFinalizarIncidente(ps:any){
     this.switchModalFinalizarIncidente=true
     this._notificarAbrirModalFinalizarIncidente.emit(ps)
   }
@@ -91,7 +88,7 @@ export class ModalService {
   }
 
 
-  abrirModalDetallePago(ps:PagoServicio){
+  abrirModalDetallePago(ps:any){
     this.switchModalDetallePago=true
     this._notificarAbrirModalDetallePago.emit(ps)
   }
@@ -117,7 +114,7 @@ export class ModalService {
     this._notificarAbrirModalBuscarVisitante.emit()
   }
 
-  cerrarModalBuscarVisitante(visitante:Visitante){
+  cerrarModalBuscarVisitante(visitante:any){
     this.switchModalBuscarVisitante=false
     this._notificarCerrarModalBuscarVisitante.emit(visitante)
   }

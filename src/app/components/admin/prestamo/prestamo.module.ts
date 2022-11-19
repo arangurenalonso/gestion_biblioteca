@@ -18,12 +18,16 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListadoComponent } from './pages/listado/listado.component';
+import { DetallePrestamoComponent } from './detalle-prestamo/detalle-prestamo.component';
+import { ViewComponent } from './pages/view/view.component';
 
 @NgModule({
   declarations: [
     ListadoComponent,
     PrestamoComponent,
     ModalBuscarVisitanteComponent,
+    DetallePrestamoComponent,
+    ViewComponent
   ],
   imports: [
     
