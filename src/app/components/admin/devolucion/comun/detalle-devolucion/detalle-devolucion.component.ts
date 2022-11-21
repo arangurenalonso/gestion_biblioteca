@@ -1,21 +1,21 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
-import { Loan } from 'src/app/model/loan';
+import { Refund } from 'src/app/model/refund';
 
 @Component({
-  selector: 'app-detalle-prestamo',
+  selector: 'app-detalle-devolucion',
   templateUrl: './detalle-devolucion.component.html',
   styleUrls: ['./detalle-devolucion.component.scss']
 })
 export class DetalleDevolucionComponent implements OnInit {
 
-  @Input() loan:Loan=new Loan(); 
+  @Input() refund:Refund=new Refund(); 
   @Output()  onProcesarClick:EventEmitter<void>=new EventEmitter()
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  procesarPrestamo(){
+  procesar(){
     this.onProcesarClick.emit();
   }
 }

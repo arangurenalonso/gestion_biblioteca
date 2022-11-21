@@ -1,7 +1,7 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Loan } from 'src/app/model/loan';
-import { LoanService } from 'src/app/services/LoanService';
+import { Refund } from 'src/app/model/refund';
+import { RefundService } from 'src/app/services/refundService';
 @Component({
   selector: 'view-form',
   templateUrl: './view.component.html',
@@ -9,10 +9,10 @@ import { LoanService } from 'src/app/services/LoanService';
 })
 export class ViewComponent implements OnInit {
   
-  @Input() loan:Loan=new Loan(); 
+  @Input() refund:Refund=new Refund(); 
 
   constructor(
-    private loanService: LoanService,
+    private refundService: RefundService,
               private router: Router, 
               private activatedRoute: ActivatedRoute) { }
 
@@ -24,10 +24,10 @@ export class ViewComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       if (id) {
-        this.loanService.findById(id).subscribe(
+        this.refundService.findById(id).subscribe(
           response=>{
             console.log(response)
-            this.loan=response.detalle.data
+            this.refund=response.detalle.data
           }
         )
       }

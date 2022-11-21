@@ -9,10 +9,18 @@ import { Refund } from 'src/app/model/refund';
 export class TableDevolucionComponent implements OnInit {
 
   @Input() refunds:Refund[]=[]; 
+  @Input() buttons=[]; 
+  @Output()  onClickButton:EventEmitter<any>=new EventEmitter()
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  delete(refund:Refund){}
+  onClickButtonSelect(refund:Refund,btnAction:number){
+    let rpta={
+      obj:refund,
+      btnAction:btnAction
+    }
+    this.onClickButton.emit(rpta)
+  }
 }

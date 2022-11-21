@@ -19,13 +19,13 @@
         <app-prestamo-step1 [refund]="refund"></app-prestamo-step1>
       </mat-step>
 
-      <mat-step completed="loan.client&&loan.expirationDate">
+      <mat-step [completed]="refund.refundedClient!=null&&refund.observation!=null">
         <ng-template matStepLabel>Datos Devolución</ng-template>
         <app-prestamo-step2 [refund]="refund"></app-prestamo-step2>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Confirmar Devolucións</ng-template>
-          
+          <app-detalle-devolucion [refund]="refund" (onProcesarClick)="procesarDevolucion()"></app-detalle-devolucion>
       </mat-step>
     </mat-stepper>
   </div>

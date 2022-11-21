@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute } from '@angular/router';
+import {  Router } from '@angular/router';
+import { ACTION } from 'src/app/enum/btn-actions';
 import { Refund } from 'src/app/model/refund';
 import { RefundService } from 'src/app/services/refundService';
 import Swal from 'sweetalert2';
@@ -23,11 +24,15 @@ export class ListadoComponent implements OnInit {
   public filtroBy:string="name"
 
   
+  buttonsTblRefund=[
+    {name:"View",action:ACTION.view,class:"btn btn-sm btn-primary"},
+    {name:"Eliminar",action:ACTION.delete,class:"btn btn-sm btn-danger"}    
+  ]
 
   
   constructor(
     private refundService: RefundService,
-    private activatedRoute: ActivatedRoute) { }
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.listar()
@@ -50,11 +55,25 @@ export class ListadoComponent implements OnInit {
     this.listar()
   }
 
-
+  onClickButton(evt:any){    
+    switch(evt.btnAction) {
+      case ACTION.view:
+        this.view(evt.obj)
+        break;
+      case ACTION.delete:
+        this.delete(evt.obj)
+        break;
+      default:
+        console.log(evt);
+    }
+    
+  }
+  public view(refund: Refund){
+    this.router.navigate(['/admin/devolucion/view',refund.id])
+  }
   public delete(refund: Refund): void {
-    let tipoObjeto:String="Prestamo"
     Swal.fire({
-      title: `Está seguro que desea eliminar el ${tipoObjeto} con id '${refund.id}'`,
+      title: `Está seguro que desea eliminar la devolución con id '${refund.id}'`,
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Si',

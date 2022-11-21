@@ -49,7 +49,7 @@ export class DevolucionComponent implements OnInit {
           .subscribe(response => {
             console.log(response)
 
-            this.router.navigate(['/admin/prestamo/listado'])
+            this.router.navigate(['/admin/devolucion/listado'])
           });
       }
     })

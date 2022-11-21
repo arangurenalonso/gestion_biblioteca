@@ -12,7 +12,7 @@
     <th>Cliente</th>
     <th>Observación</th>
     <th>Cant libros Devuelta</th>
-    <th>Acciones</th>
+    <th  *ngIf="buttons.length>0">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -24,32 +24,10 @@
     <td>{{ refund.refundedClient.person.name }} {{ refund.refundedClient.person.surname }}</td>
     <td>{{ refund.observation}}</td>    
     <td>{{ refund.refundDetails.length}}</td>
-    <td>
-      <button
-        type="button"
-        name="editar"
-        class="btn btn-primary btn-sm"
-        [routerLink]="[
-          '/admin/devolucion/view',
-          refund.id 
-        ]"
-      >
-        view
-      </button>
-      <button
-        type="button"
-        name="eliminar"
-        class="btn btn-sm"
-        (click)="
-        delete(refund);
-          $event.stopPropagation()
-        "
-      >
-        <span
-          class="btn btn-sm btn-danger"
-          >Eliminar</span
-        >
-      </button>
+    <td *ngIf="buttons.length>0">      
+      <button *ngFor="let btn of buttons" type="button" [class]="btn.class"
+      (click)="onClickButtonSelect(refund,btn.action); $event.stopPropagation()"
+      >{{btn.name}}</button>
     </td>
     </tr>
   </tbody>

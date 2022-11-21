@@ -1,29 +1,29 @@
 
-        <div class="col mt-5" *ngIf="loan.client && loan.expirationDate">
+        <div class="col mt-5" *ngIf="refund.refundedClient && refund.observation">
             <div class="card auth-detailblock">
               <div class="card-header">
                 <div class="row g-3">
                   <div class="row d-flex justify-content-center my-4">
                     <h1 class="mb-0 fw-bold text-success text-center">
-                      Detalle de Prestamo
+                      Detalle de Devolucion
                     </h1>
                   </div>
   
                   <div class="col-6">
                     <label class="form-label col-6 col-sm-5">Cliente:</label>
-                    <span>  {{ loan.client.person.name }}
-                      {{ loan.client.person.surname }}</span>
+                    <span>  {{ refund.refundedClient.person.name }}
+                      {{ refund.refundedClient.person.surname }}</span>
                   </div>
                   <div class="col-6">
-                    <label class="form-label col-6 col-sm-5">Fecha de devolución:</label>
-                    <span>{{ loan.expirationDate | date: "dd MMMM yyyy" }}</span>
+                    <label class="form-label col-6 col-sm-5">Observación:</label>
+                    <span>{{ refund.observation }}</span>
                   </div>
                 </div>
               </div>
               <div class="card-body">
-                <!-- <app-table-prestamo [loan]="loan"></app-table-prestamo> -->
+                <app-table-refund-detail [refundDetails]="refund.refundDetails"></app-table-refund-detail>
               </div>
-              <div class="card-footer" *ngIf="!loan?.id">
+              <div class="card-footer" *ngIf="!refund?.id"> 
                
   
                 <div>
@@ -31,10 +31,9 @@
                     type="button"
                     name="editar"
                     class="btn btn-dark w-100"
-                    *ngIf="loan.client && loan.expirationDate"
-                    (click)="procesarPrestamo()"
+                    (click)="procesar()"
                   >
-                    Confirmar Prestamo
+                    Confirmar
                   </button>
                 </div>
               </div>

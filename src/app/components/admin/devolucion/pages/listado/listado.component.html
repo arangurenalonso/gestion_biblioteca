@@ -22,7 +22,8 @@
       <div class="col-sm-12">
         <div class="card mb-3">
           <div class="card-body">
-            <app-table-devolucion [refunds]="refunds"></app-table-devolucion>
+            <app-table-devolucion [refunds]="refunds"  [buttons]="buttonsTblRefund" 
+            (onClickButton)="onClickButton($event)"></app-table-devolucion>
           </div>
         </div>
       </div>
