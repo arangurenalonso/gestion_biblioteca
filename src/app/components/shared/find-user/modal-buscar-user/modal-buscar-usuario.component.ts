@@ -7,11 +7,11 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-buscar-visitante',
-  templateUrl: './modal-buscar-visitante.component.html',
-  styleUrls: ['./modal-buscar-visitante.component.scss']
+  templateUrl: './modal-buscar-usuario.component.html',
+  styleUrls: ['./modal-buscar-usuario.component.scss']
 })
 export class ModalBuscarVisitanteComponent implements OnInit {
-  entityName:String="Cliente"
+  entityName:String="Usuario"
   public user: Usuario = new Usuario()
   public titulo: String = `Regitro ${this.entityName}`
   public errores: any
@@ -23,9 +23,6 @@ export class ModalBuscarVisitanteComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-
-  }
-  buscarVisitante() {
 
   }
 

@@ -1,0 +1,65 @@
+<div>
+    <div class="row d-flex justify-content-center">
+      <div class="row col-5">
+        <div class="input-group rounded">
+          <input
+            type="text"
+            class="form-control rounded"
+            placeholder="Ingrese el DNI del Usuario"
+            aria-label="Search"
+            [(ngModel)]="dniUsuario"
+            aria-describedby="search-addon"
+            [disabled]="loanDetails.length>0||refund.refundDetails.length>0"
+          />
+          <button
+          *ngIf="loanDetails.length==0&&refund.refundDetails.length==0"
+            class="input-group-text border-0"
+            id="search-addon" [disabled]="loanDetails.length>0||refund.refundDetails.length>0"
+            (click)="findByUserDNI()"
+          >
+            <i class="fas fa-search"></i>
+          </button>
+          <button
+                  *ngIf="loanDetails.length>0||refund.refundDetails.length>0"
+                  type="button"
+                  name="editar"
+                  class="btn btn-warning btn-sm"
+                  (click)="borrarUsuario()"
+                >
+                  Realizar otra busqueda
+                </button>
+        </div>
+      </div>
+      <div class="col"></div>
+      <div class="row col-2">
+        <ng-content [select]="btnStepForward"></ng-content>   
+      </div>
+    </div>
+    <div *ngIf="loanDetails.length>0||refund.refundDetails.length>0">
+      
+    <div class="row clearfix g-3">
+      <div class="col-sm-12">
+        <div class="card mx-1 my-3">
+          <div class="card-body">
+            <app-table-loan-detail [loanDetails]="loanDetails"
+            [buttons]="buttonsTblLoanDetail"  (onClickButton)="onClickButtonTblBook($event)"
+            ></app-table-loan-detail>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="row clearfix g-3">
+      <div class="col-sm-12">
+        <div class="card mx-1 my-3">
+          <div class="card-body">
+            
+            <app-table-refund-detail [refundDetails]="refund.refundDetails"
+            [buttons]="buttonsTblRefundDetail"  (onClickButton)="onClickButtonTblBook($event)"
+            ></app-table-refund-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

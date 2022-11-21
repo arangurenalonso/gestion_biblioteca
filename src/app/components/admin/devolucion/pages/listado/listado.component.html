@@ -1,0 +1,43 @@
+<div class="body d-flex py-lg-3 py-md-2">
+  <div class="container-xxl">
+    <div class="row align-items-center">
+      <div class="border-0 mb-4">
+        <div
+          class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap"
+        >
+          <h3 class="fw-bold mb-0">Devolución</h3>
+          <div class="col-auto d-flex w-sm-100">
+            <a
+              [routerLink]="['/admin/devolucion/crear']"
+              class="btn btn-primary btn-set-task w-sm-100"
+            >
+              <i class="icofont-plus-circle me-2 fs-6"></i>Agregar
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row end  -->
+    <div class="row clearfix g-3">
+      <div class="col-sm-12">
+        <div class="card mb-3">
+          <div class="card-body">
+            <app-table-devolucion [refunds]="refunds"></app-table-devolucion>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-paginator 
+      class=""
+      *ngIf="paginator"
+      [length]="paginator.totalElementos"
+      [pageSize]="pageSize"
+      [pageIndex]="pageNumber"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="pagSizeOption"
+      aria-label="Select page"
+      (page)="handlePage($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit ,Input} from '@angular/core';
-import {  ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Loan } from 'src/app/model/loan';
 import { LoanService } from 'src/app/services/LoanService';
 @Component({
@@ -13,6 +13,7 @@ export class ViewComponent implements OnInit {
 
   constructor(
     private loanService: LoanService,
+              private router: Router, 
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {

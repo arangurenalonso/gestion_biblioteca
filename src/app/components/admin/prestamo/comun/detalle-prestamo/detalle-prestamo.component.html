@@ -1,0 +1,40 @@
+
+        <div class="col mt-5" *ngIf="loan.client && loan.expirationDate">
+            <div class="card auth-detailblock">
+              <div class="card-header">
+                <div class="row g-3">
+                  <div class="row d-flex justify-content-center my-4">
+                    <h1 class="mb-0 fw-bold text-success text-center">
+                      Detalle de Prestamo
+                    </h1>
+                  </div>
+  
+                  <div class="col-6">
+                    <label class="form-label col-6 col-sm-5">Cliente:</label>
+                    <span>  {{ loan.client.person.name }}
+                      {{ loan.client.person.surname }}</span>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label col-6 col-sm-5">Fecha de devolución:</label>
+                    <span>{{ loan.expirationDate | date: "dd MMMM yyyy" }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <app-table-loan-detail [loanDetails]="loan.loanDetails"></app-table-loan-detail>
+              </div>
+              <div class="card-footer" *ngIf="!loan?.id"> 
+                <div>
+                  <button
+                    type="button"
+                    name="editar"
+                    class="btn btn-dark w-100"
+                    *ngIf="loan.client && loan.expirationDate"
+                    (click)="procesarPrestamo()"
+                  >
+                    Confirmar Prestamo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>

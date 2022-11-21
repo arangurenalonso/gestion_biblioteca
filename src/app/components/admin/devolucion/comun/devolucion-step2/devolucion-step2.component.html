@@ -1,0 +1,48 @@
+
+<div>
+    <div class="row">
+      <div class="h2 fw-bold col-8 mb-3">Cabecera Devolución</div>
+      <div class="col"></div>
+      <div class="col-1">
+        <ng-content [select]="btnStepForward"></ng-content>        
+      </div>
+    </div>
+
+    <div class="row clearfix g-3">
+      <div class="col-lg-6">
+        <div class="card mb-3">
+          <div
+            class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0"
+          >
+            <h2 class="m-0 fw-bold">Datos de Devolución</h2>
+          </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="" class="form-label col-3"
+                >Observación</label
+              >
+              <div class="col">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <app-find-user (onUserChange)="onUserChange($event)" [title]="'Datos Persona que devuelve el libro'"></app-find-user>
+      </div>
+    </div>
+    <div class="m-0 h2 fw-bold col-8">Detalle Prestamo</div>
+    <div class="row clearfix g-3">
+      <div class="col-sm-12">
+        <div class="card mx-1 my-3">
+          <div class="card-body">
+            
+            
+            <app-table-refund-detail [refundDetails]="refund.refundDetails"
+            ></app-table-refund-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

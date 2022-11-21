@@ -1,0 +1,97 @@
+<div>
+    <div class="row d-flex justify-content-center">
+      <div class="row col-5">
+        <div class="input-group rounded">
+          <input
+            type="text"
+            (keyup)="buscarNombre()"
+            class="form-control rounded"
+            placeholder="Buscar Nombre Visitante"
+            aria-label="Search"
+            [(ngModel)]="nombreLibro"
+            aria-describedby="search-addon"
+          />
+          <span
+            class="input-group-text border-0"
+            id="search-addon"
+            (click)="buscarNombre()"
+          >
+            <i class="fas fa-search"></i>
+          </span>
+        </div>
+      </div>
+      <div class="row col-2">
+        <div class="form-group">
+          <select
+            (change)="selectAuthor()"
+            [(ngModel)]="authorSeleccionado"
+            class="form-control"
+          >
+            <option [value]="0">Filtro Author</option>
+            <option *ngFor="let author of authores" [value]="author.id">
+              {{ author.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row col-2">
+        <div class="form-group">
+          <select
+            (change)="selectEditorial()"
+            [(ngModel)]="editorialSeleccionada"
+            class="form-control"
+          >
+            <option [value]="0">Filtro Editorial</option>
+            <option
+              *ngFor="let editorial of editoriales"
+              [value]="editorial.id"
+            >
+              {{ editorial.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col"></div>
+      <div class="row col-2">
+        <ng-content [select]="btnStepForward"></ng-content>   
+      </div>
+    </div>
+    <div class="row clearfix g-3">
+      <div class="col-sm-12">
+        <div class="card mx-1 my-3">
+          <div class="card-body">
+           <app-table-book [books]="books" 
+           [showBorrowedStock]="false" 
+           [showStock]="false" 
+           [buttons]="buttonsTblBook" 
+           (onClickButton)="onClickButtonTblBook($event)"></app-table-book>
+            <!--FIN-->
+            <mat-paginator
+              *ngIf="paginator"
+              [length]="paginator.totalElementos"
+              [pageSize]="pageSize"
+              [pageIndex]="pageNumber"
+              [showFirstLastButtons]="true"
+              [pageSizeOptions]="pagSizeOption"
+              aria-label="Select page"
+              (page)="pageEvent($event)"
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="row clearfix g-3">
+      <div class="col-sm-12">
+        <div class="card mx-1 my-3">
+          <div class="card-body">
+            <app-table-loan-detail [loanDetails]="loan.loanDetails"
+            [buttons]="buttonsTblLoanDetail"  (onClickButton)="onClickButtonTblBook($event)"
+            ></app-table-loan-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

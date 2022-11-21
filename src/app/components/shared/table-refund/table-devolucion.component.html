@@ -1,0 +1,56 @@
+
+<table
+  id="myProjectTable"
+  class="table table-hover align-middle mb-0"
+  style="width: 100%"
+>
+  <thead>
+    <tr>
+    <th>id</th>
+    <th>Fecha devolución</th>
+    <th>Empleado</th>
+    <th>Cliente</th>
+    <th>Observación</th>
+    <th>Cant libros Devuelta</th>
+    <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr></tr>
+    <tr *ngFor="let refund of refunds">
+    <td class="cursor-pointer-g">{{ refund.id }}</td>
+    <td>{{ refund.refundedDate  | date:'MMMM d, y'}}</td>
+    <td>{{ refund.employee.person.name }} {{ refund.employee.person.surname }}</td>
+    <td>{{ refund.refundedClient.person.name }} {{ refund.refundedClient.person.surname }}</td>
+    <td>{{ refund.observation}}</td>    
+    <td>{{ refund.refundDetails.length}}</td>
+    <td>
+      <button
+        type="button"
+        name="editar"
+        class="btn btn-primary btn-sm"
+        [routerLink]="[
+          '/admin/devolucion/view',
+          refund.id 
+        ]"
+      >
+        view
+      </button>
+      <button
+        type="button"
+        name="eliminar"
+        class="btn btn-sm"
+        (click)="
+        delete(refund);
+          $event.stopPropagation()
+        "
+      >
+        <span
+          class="btn btn-sm btn-danger"
+          >Eliminar</span
+        >
+      </button>
+    </td>
+    </tr>
+  </tbody>
+</table>

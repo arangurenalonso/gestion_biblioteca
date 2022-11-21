@@ -109,6 +109,31 @@
             </li>
           </ul>
         </li>
+        <li class="collapsed" >
+          <a
+            class="m-link"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu-devolucion"
+            href="#"
+          >
+         <span>devolución</span>
+            <span
+              class="arrow icofont-rounded-down ms-auto text-end fs-5"
+            ></span
+          ></a>
+          <ul class="sub-menu collapse" id="menu-devolucion">
+            <li  >
+              <a class="ms-link" [routerLink]="['/admin/devolucion/listado']"
+                >Lista</a
+              >
+            </li>
+            <li  >
+              <a class="ms-link" [routerLink]="['/admin/devolucion/crear']"
+                >Devolver</a
+              >
+            </li>
+          </ul>
+        </li>
        
        </ul>
     </div>

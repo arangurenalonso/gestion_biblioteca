@@ -9,4 +9,4 @@ export class Loan {
     loanDate:Date;
     expirationDate:Date
     loanDetails:LoanDetail[]=[]
-  }
+  } 

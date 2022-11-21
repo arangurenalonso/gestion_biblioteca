@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './pages/form/form.component';
-import { SharedModule } from '../../shared/shared/shared.module';
 import { AuthorRoutingModule } from './author-routing.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({

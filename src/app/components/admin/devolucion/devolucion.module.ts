@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { VisitanteRoutingModule } from './prestamo-routing.module';
+import { DevolucionRoutingModule } from './devolucion-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PrestamoComponent } from './pages/prestamo/prestamo.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select';
@@ -17,31 +16,33 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListadoComponent } from './pages/listado/listado.component';
-import { DetallePrestamoComponent } from './comun/detalle-prestamo/detalle-prestamo.component';
+import { DetalleDevolucionComponent } from './comun/detalle-devolucion/detalle-devolucion.component';
 import { ViewComponent } from './pages/view/view.component';
 import { SharedModule } from '../../shared/shared.module';
-import { Step1PrestamoComponent } from './comun/prestamo-step1/prestamo-step1.component';
-import { Step2PrestamoComponent } from './comun/prestamo-step2/prestamo-step2.component';
+import { DevolucionComponent } from './pages/devolucion/devolucion.component';
+import { Step1DevolucionComponent } from './comun/devolucion-step1/devolucion-step1.component';
+import { Step2DevolucionComponent } from './comun/devolucion-step2/devolucion-step2.component';
 
 @NgModule({
   declarations: [
     ListadoComponent,
-    PrestamoComponent,
-    Step1PrestamoComponent,
-    Step2PrestamoComponent,
-    DetallePrestamoComponent,
-    ViewComponent
+    DevolucionComponent,
+    DetalleDevolucionComponent,
+    ViewComponent,
+    Step1DevolucionComponent,
+    Step2DevolucionComponent
+
   ],
   imports: [
     
     CommonModule,    
     FormsModule,
-    VisitanteRoutingModule,
+    DevolucionRoutingModule,
     MatRadioModule,
     MatPaginatorModule,
     MatSelectModule,
     ReactiveFormsModule,
-    
+    SharedModule,
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
@@ -51,9 +52,7 @@ import { Step2PrestamoComponent } from './comun/prestamo-step2/prestamo-step2.co
     MatMomentDateModule,
     MatStepperModule,
     MatRadioModule,
-    MatCheckboxModule,
-    SharedModule
-    //ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    MatCheckboxModule
   ]
 })
-export class PrestamoModule { }
+export class DevolucionModule { }

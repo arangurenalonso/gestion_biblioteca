@@ -20,12 +20,18 @@ const routes: Routes = [
         loadChildren: () => import('./libro/libro.module').then(m=>m.LibroModule)
       },
       {
+        path: 'editorial',
+        loadChildren: () => import('./editorial/editorial.module').then(m=>m.EditorialModule)
+      },
+      
+      {
         path: 'prestamo',
         loadChildren: () => import('./prestamo/prestamo.module').then(m=>m.PrestamoModule)
       },
+      
       {
-        path: 'editorial',
-        loadChildren: () => import('./editorial/editorial.module').then(m=>m.EditorialModule)
+        path: 'devolucion',
+        loadChildren: () => import('./devolucion/devolucion.module').then(m=>m.DevolucionModule)
       },
       { path: '**', redirectTo: 'home' }
     ]

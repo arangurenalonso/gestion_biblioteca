@@ -21,29 +21,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <table
-                  id="myProjectTable"
-                  class="table table-hover align-middle mb-0"
-                  style="width: 100%"
-                >
-                  <thead>
-                    <tr>
-                      <th>id</th>
-                      <th>Nombre</th>
-                      <th>ISBN</th>
-                      <th>Año</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr></tr>
-                    <tr *ngFor="let obj of loan.loanDetails">
-                      <td class="cursor-pointer-g">{{ obj.book.id }}</td>
-                      <td>{{ obj.book.name }}</td>
-                      <td>{{ obj.book.isbn }}</td>
-                      <td>{{ obj.book.publicationYear }}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <!-- <app-table-prestamo [loan]="loan"></app-table-prestamo> -->
               </div>
               <div class="card-footer" *ngIf="!loan?.id">
                

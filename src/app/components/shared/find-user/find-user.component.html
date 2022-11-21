@@ -1,0 +1,72 @@
+<app-modal-buscar-visitante
+  *ngIf="modalService.switchModalBuscarVisitante"
+></app-modal-buscar-visitante>
+        <div class="card mb-3">
+          <div class="card-header py-3 bg-transparent border-bottom-0">
+            <div class="row">
+              <div class="m-0 h5 fw-bold col-8">{{title}}</div>
+
+              <div class="row col-4">
+                <button
+                  *ngIf="!usuario"
+                  type="button"
+                  name="editar"
+                  class="btn btn-primary btn-sm"
+                  (click)="abrirModalCrearCliente()"
+                >
+                  <i class="icofont-plus-circle me-2 fs-6"></i>Registrar
+                  
+                </button>
+
+                <button
+                  *ngIf="usuario"
+                  type="button"
+                  name="editar"
+                  class="btn btn-warning btn-sm"
+                  (click)="borrarCliente()"
+                >
+                  Borrar Cliente
+                </button>
+              </div>
+            </div>
+
+            <br />
+            <div class="row">
+              <div class="col-8">
+                <div class="input-group rounded col">
+                  <input
+                    type="text"
+                    class="form-control rounded"
+                    placeholder="Ingrese el DNI del cliente"
+                    aria-label="Search"
+                    [(ngModel)]="filtro"
+                    [disabled]="usuario != null"
+                    aria-describedby="search-addon"
+                  />
+                  <span
+                    class="input-group-text border-0"
+                    id="search-addon"
+                    (click)="buscarCliente()"
+                  >
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" *ngIf="usuario">
+            <div class="row">
+              <div class="col-8">
+                <label class="form-label text-secondary"
+                  >Nombre Completo:
+                </label>
+                <p class="ml-5">
+                  {{ usuario.person.name }}
+                  {{ usuario.person.surname }}
+                </p>
+                <label class="form-label text-secondary">DNI: </label>
+                <p>{{ usuario.person.dni }}</p>
+              </div>
+            </div>
+          </div>
+        </div>

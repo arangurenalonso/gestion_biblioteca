@@ -1,0 +1,32 @@
+
+
+<div class="body d-flex py-lg-3 py-md-2">
+  <div class="container-xxl">
+    <div class="row align-items-center">
+      <div class="border-0 mb-4">
+        <div
+          class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap"
+        >
+          <h1 class="fw-bold mb-0 text-primary">Devolución Libro</h1>
+        </div>
+      </div>
+    </div>
+    
+
+    <mat-stepper linear #stepper>
+      <mat-step [completed]="refund.refundDetails.length > 0">
+        <ng-template matStepLabel>Elegir libros</ng-template>
+        <app-prestamo-step1 [refund]="refund"></app-prestamo-step1>
+      </mat-step>
+
+      <mat-step completed="loan.client&&loan.expirationDate">
+        <ng-template matStepLabel>Datos Devolución</ng-template>
+        <app-prestamo-step2 [refund]="refund"></app-prestamo-step2>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Confirmar Devolucións</ng-template>
+          
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
