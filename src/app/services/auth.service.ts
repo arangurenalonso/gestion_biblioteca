@@ -97,7 +97,6 @@ constructor(private http: HttpClient,private router: Router) {
   }
 
   public agregarAuthorizationHeader(cabecera:HttpHeaders) {
-    console.log("<<< Entro a agregar AuthorizaciònHeader >>>")
     let token = this.token;
     if (token != null) {
       return cabecera.append('Authorization', 'Bearer ' + token);

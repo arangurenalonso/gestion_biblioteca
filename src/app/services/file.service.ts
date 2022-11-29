@@ -5,15 +5,15 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { AuthService } from "./auth.service";
-import { catchError, Observable, throwError } from "rxjs";
+import { catchError, firstValueFrom, Observable, throwError } from "rxjs";
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class FileService {
-    public urlEndPoint: string = environment.apiUrl + "/api/uploads";
-    private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    public urlEndPoint: string = environment.apiUrl + "/api/public/img";
+    private httpHeaders = new HttpHeaders({ 'enctype': 'multipart/form-data' });
 
     constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
@@ -22,27 +22,14 @@ export class FileService {
         return this._notificarUploadFoto
       }
       
-    subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
+    
+    async subirFoto(archivo: File): Promise<any> {
 
-        let formData = new FormData();
-        formData.append("archivo", archivo);
-        formData.append("id", id);
-        let httpHeaders = new HttpHeaders();
-        let token = this.authService.token;
-        if (token != null) {
-          httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + token);
-        }
-        const req = new HttpRequest(
-            'POST',
-            `${this.urlEndPoint}/foto/upload`,
-            formData,
-            {
-                reportProgress: true,
-                headers: httpHeaders//this.authService.agregarAuthorizationHeader(this.httpHeaders)
-            }
-        );
-
-        return this.http.request(req)
+        const formData = new FormData();
+        formData.append("file", archivo);
+        
+        
+        return await firstValueFrom (this.http.post(this.urlEndPoint, formData, { headers: this.authService.agregarAuthorizationHeader(this.httpHeaders) })
             .pipe(
                 catchError(e => {
                     if (this.authService.isNoAutorizado(e)) {
@@ -61,7 +48,7 @@ export class FileService {
                     console.log(e)
                     return throwError(e);
                 })
-            );
+            ));
 
     }
 

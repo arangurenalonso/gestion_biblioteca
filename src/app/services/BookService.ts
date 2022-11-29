@@ -18,7 +18,7 @@ export class BookService {
 
   page(filtroURL:string): Observable<any> {
     return this.http.get(this.urlEndPoint+filtroURL , { headers: this.authService.agregarAuthorizationHeader(this.httpHeaders) })
-    .pipe(
+    .pipe( 
       catchError(e => {
         if (this.authService.isNoAutorizado(e)) {
           return throwError(e);

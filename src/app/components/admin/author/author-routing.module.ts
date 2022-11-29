@@ -8,7 +8,6 @@ const routes: Routes = [
     path: '',
     children: [
 
-      { path: 'listado/page/:page', component: ListadoComponent },
       { path: 'listado', component: ListadoComponent },
       { path: 'crear', component: FormComponent },
       {path:'update/:id', component:FormComponent},

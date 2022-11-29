@@ -7,6 +7,7 @@ import { AuthorService } from 'src/app/services/authorService';
 import { EditorialService } from 'src/app/services/editorialService';
 import { BookService } from 'src/app/services/BookService';
 import Swal from 'sweetalert2';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-add',
@@ -15,16 +16,20 @@ import Swal from 'sweetalert2';
 })
 export class AddComponent implements OnInit {
   entityName: String = "Libro"
-  titulo: String = "Registrar "
+  titulo: String = "Registrar"
   libro: Book = new Book()
   actualYear = new Date().getFullYear()
   editoriales: Editorial[] = [];
   authores: Author[] = [];
 
+  src=null
+  
+  public fotoSeleccionada: File;
   public errores: any
   constructor(
     private authorService: AuthorService,
     private editorialService: EditorialService,
+    private filseService:FileService,
     private bookService: BookService,
     private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -37,7 +42,9 @@ export class AddComponent implements OnInit {
     this.editoriales = editoriales.detalle.data
 
     await this.cargarInformación();
-
+    // this.libro.urlImg="https://dawi1.s3.sa-east-1.amazonaws.com/1669092880259_fromApp.jpg"
+    console.log(this.libro.urlImg);
+    
   }
 
 
@@ -88,7 +95,14 @@ export class AddComponent implements OnInit {
     this.libro.authors = this.libro.authors.filter(x => x.id != author.id)
     this.authores.sort((x, y) => x.id - y.id)
   }
-  create() {
+  async create() {
+    if (this.fotoSeleccionada) {
+      let respuesta=await this.filseService.subirFoto(this.fotoSeleccionada)
+      console.log("respuesta",respuesta.detalle.data);
+      this.libro.urlImg=respuesta.detalle.data
+      
+    } 
+    
     this.bookService.registrar(this.libro)
       .subscribe(response => {
         Swal.fire({
@@ -107,8 +121,15 @@ export class AddComponent implements OnInit {
       )
 
   }
-  update() {
-    console.log(this.libro);
+  async update() {
+    console.log("this.fotoSeleccionada",this.fotoSeleccionada);
+    
+    if (this.fotoSeleccionada) {
+      let respuesta=await this.filseService.subirFoto(this.fotoSeleccionada)
+      console.log("respuesta",respuesta.detalle.data);
+      this.libro.urlImg=respuesta.detalle.data
+      
+    } 
 
     this.bookService.actualizar(this.libro)
       .subscribe(response => {
@@ -128,6 +149,19 @@ export class AddComponent implements OnInit {
         }
       )
 
+  }
+  seleccionarFoto(event) {
+    this.fotoSeleccionada = event.target.files[0];
+    console.log(this.fotoSeleccionada);
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      Swal.fire('Error seleccionar imagen: ', 'El archivo debe ser del tipo imagen', 'error');
+      this.fotoSeleccionada = null;
+    }else{
+      const reader = new FileReader()
+
+      reader.addEventListener('load', () => this.src = reader.result!!)
+      reader.readAsDataURL(this.fotoSeleccionada)
+    }
   }
 
 }

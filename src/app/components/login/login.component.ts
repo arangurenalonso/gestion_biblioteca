@@ -52,14 +52,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         
         this.authService.guardarToken(response.tokens.accessToken);
 
-        await this.userService.findById(objPayload.userId).subscribe(
-          response => {
-            let _usuario = (response.detalle.data as Usuario);
-            this.authService.guardarUsuario(_usuario);
-          });
-        let usuarioConectado=this.authService.usuario
+        let responseUsuarioService=await this.userService.findById(objPayload.userId)
+        let usuario=responseUsuarioService.detalle.data
+        
+        this.authService.guardarUsuario(usuario);
+        console.log("usuario>>>>>>>>>>>>>>>",usuario);
+        
 
-        swal.fire('Login', `Hola ${usuarioConectado.person.name} ${usuarioConectado.person.surname}, has iniciado sesión con éxito!`, 'success');
+        swal.fire('Login', `Hola ${usuario.person.name} ${usuario.person.surname}, has iniciado sesión con éxito!`, 'success');
         this.showLoading = false;
         this.router.navigateByUrl('/admin/');
       },

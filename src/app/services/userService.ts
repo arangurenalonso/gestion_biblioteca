@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, firstValueFrom, map, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
 import { Author } from '../model/author';
@@ -39,8 +39,8 @@ export class UserService {
     ); 
   }
 
-  findById(id): Observable<any> {
-    return this.http.get(`${this.urlEndPoint}/${id}`, { headers: this.authService.agregarAuthorizationHeader(this.httpHeaders) }).pipe(
+  async findById(id): Promise<any> {
+    return await firstValueFrom( this.http.get(`${this.urlEndPoint}/${id}`, { headers: this.authService.agregarAuthorizationHeader(this.httpHeaders) }).pipe(
       
       catchError(e => {
         console.log(e)
@@ -57,7 +57,7 @@ export class UserService {
         })        
         return throwError(e);
       })
-    );
+    ));
   }
 
   registrar(user: Usuario): Observable<any> {
